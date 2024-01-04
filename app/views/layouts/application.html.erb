@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bookers2</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Sphere</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <%= render 'layouts/header' %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <body>
-    <%= render 'layouts/header' %>  <!-- ここを追記 -->
-    <%= yield %>
-    <%= render 'layouts/footer' %>  <!-- ここを追記 -->
-  </body>
+  <div class="container">
+    <div class="row">
+      <%= render 'layouts/sidebar' %> <!-- サイドバーをレンダリング -->
+      <div class="col-md-9">
+        <%= yield %> <!-- メインコンテンツ -->
+      </div>
+    </div>
+  </div>
+
+  <%= render 'layouts/footer' %>
+</body>
 </html>

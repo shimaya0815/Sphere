@@ -1,9 +1,11 @@
 <h1><%= @todo.title %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @todo.description %>
-</p>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><strong>Description:</strong></h5>
+    <p class="card-text"><%= @todo.description %></p>
 
-<%= link_to 'Edit', edit_todo_path(@todo) %> |
-<%= link_to 'Back to List', todos_path %>
+    <%= link_to 'Edit', edit_todo_path(@todo), class: 'btn btn-primary' %> |
+    <%= link_to 'Back to User Dashboard', 'https://1f26d4dec4a644d79c8bd69c96beb321.vfs.cloud9.ap-northeast-1.amazonaws.com/users/1', class: 'btn btn-secondary' %>
+  </div>
+</div>
