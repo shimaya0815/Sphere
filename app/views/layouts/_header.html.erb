@@ -1,0 +1,61 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <span>Sphere</span> <!-- ここを変更: BookersからSphereへ -->
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <!-- ログイン後のユーザーの詳細ページへのリンク -->
+            <li class="nav-item">
+              <a class="nav-link text-light" href="<%= user_path(current_user) %>">
+                <i class="fa-solid fa-home"></i> マイページ
+              </a>
+            </li>
+            <!-- その他のユーザー一覧ページへのリンク -->
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/users">
+                <i class="fa-solid fa-users"></i> ユーザー一覧
+              </a>
+            </li>
+            <!-- ToDoリストページへのリンク -->
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/todos">
+                <i class="fa-solid fa-list"></i> ToDoリスト
+              </a>
+            </li>
+            <!-- ユーザー招待リンクを残す -->
+            <li class="nav-item">
+              <a class="nav-link text-light" href="<%= new_user_invitation_path %>">
+                <i class="fas fa-user-plus"></i> ユーザー招待
+              </a>
+            </li>
+            <!-- ログアウトリンク -->
+            <li class="nav-item">
+              <a class="nav-link text-light" rel="nofollow" data-method="delete" href="<%= destroy_user_session_path %>">
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+              </a>
+            </li>
+          <% else %>
+            <!-- サインアップリンク -->
+            <li class="nav-item">
+              <a class="nav-link text-light" href="<%= new_user_registration_path %>">
+                <i class="fas fa-user-plus"></i> サインアップ
+              </a>
+            </li>
+            <!-- ログインリンク -->
+            <li class="nav-item">
+              <a class="nav-link text-light" href="<%= new_user_session_path %>">
+                <i class="fas fa-sign-in-alt"></i> ログイン
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,9 @@
+<h1><%= @todo.title %></h1>
+
+<p>
+  <strong>Description:</strong>
+  <%= @todo.description %>
+</p>
+
+<%= link_to 'Edit', edit_todo_path(@todo) %> |
+<%= link_to 'Back to List', todos_path %>

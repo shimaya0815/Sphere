@@ -1,0 +1,10 @@
+<h1><%= @user.email %>'s Dashboard</h1>
+
+<h2>Your ToDo List</h2>
+<ul>
+  <% @todos.each do |todo| %>
+    <li><%= todo.title %> - <%= todo.description %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'View All ToDos', todos_path %>
