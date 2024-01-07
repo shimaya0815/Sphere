@@ -4,8 +4,10 @@
   <div class="card-body">
     <h5 class="card-title"><strong>Description:</strong></h5>
     <p class="card-text"><%= @todo.description %></p>
+    <p><strong>Assignee:</strong> <%= @todo.assignee&.email %></p>
+    <p><strong>Deadline:</strong> <%= @todo.deadline %></p>
 
-    <%= link_to 'Edit', edit_todo_path(@todo), class: 'btn btn-primary' %> |
-    <%= link_to 'Back to User Dashboard', 'https://1f26d4dec4a644d79c8bd69c96beb321.vfs.cloud9.ap-northeast-1.amazonaws.com/users/1', class: 'btn btn-secondary' %>
+    <%= link_to 'Edit', edit_todo_path(id: @todo.id, office_id: current_user.office_id), class: 'btn btn-primary' %> |
+    <%= link_to 'Back to User Dashboard', todos_path(office_id: current_user.office_id), class: 'btn btn-secondary' %>
   </div>
 </div>

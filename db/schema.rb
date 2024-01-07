@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_04_012711) do
+ActiveRecord::Schema.define(version: 2024_01_07_062200) do
+
+  create_table "fiscal_years", force: :cascade do |t|
+    t.integer "period_number"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "tax_client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tax_clients", force: :cascade do |t|
+    t.string "name"
+    t.string "web_app_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "office_id"
+  end
 
   create_table "todos", force: :cascade do |t|
     t.string "title"
@@ -18,6 +35,10 @@ ActiveRecord::Schema.define(version: 2024_01_04_012711) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "assignee_id"
+    t.date "deadline"
+    t.integer "tax_client_id"
+    t.integer "office_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 

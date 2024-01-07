@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h1>New Tax Client</h1>
+
+  <%= form_with(model: @tax_client, local: true, html: { class: 'form' }) do |form| %>
+    <!-- エラーメッセージ -->
+    <% if @tax_client.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(@tax_client.errors.count, "error") %> prohibited this tax client from being saved:</h4>
+        <ul>
+          <% @tax_client.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- TaxClientフィールド -->
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :web_app_id %>
+      <%= form.text_field :web_app_id, class: 'form-control' %>
+    </div>
+
+    <!-- FiscalYearフィールド -->
+    <%= form.fields_for :fiscal_years do |fy_form| %>
+      <div class="form-group">
+        <%= fy_form.label :period_number %>
+        <%= fy_form.number_field :period_number, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= fy_form.label :start_date %>
+        <%= fy_form.date_select :start_date, {}, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= fy_form.label :end_date %>
+        <%= fy_form.date_select :end_date, {}, class: 'form-control' %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

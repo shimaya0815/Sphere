@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in, keys: [:office_id])
   end
 
-  # ユーザーがログイン後にリダイレクトされるパスを指定
   def after_sign_in_path_for(resource)
-    user_path(resource)
+    # サインイン後のリダイレクト先を Devise のユーザー登録ページに設定
+    new_user_registration_path
   end
 end

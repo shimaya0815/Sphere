@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h1>Tax Clients</h1>
+  <%= link_to 'New Tax Client', new_tax_client_path(office_id: params[:office_id]), class: 'btn btn-primary mb-3' %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Web App ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tax_clients.each do |client| %>
+        <tr>
+          <td><%= client.name %></td>
+          <td><%= client.web_app_id %></td>
+          <td>
+            <%= link_to 'View', tax_client_path(id: client.id, office_id: params[:office_id]), class: 'btn btn-info btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

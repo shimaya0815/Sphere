@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <h1>Tax Client: <%= @tax_client.name %></h1>
+  <p><strong>Web App ID:</strong> <%= @tax_client.web_app_id %></p>
+
+  <h3>Fiscal Years</h3>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Period Number</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @fiscal_years.each do |year| %>
+        <tr>
+          <td><%= year.period_number %></td>
+          <td><%= year.start_date %></td>
+          <td><%= year.end_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'Back to Tax Clients', tax_clients_path, class: 'btn btn-secondary' %>
+</div>

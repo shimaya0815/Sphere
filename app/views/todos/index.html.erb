@@ -2,6 +2,8 @@
   <h1>Your ToDo List</h1>
 
   <%= link_to 'New ToDo', new_todo_path, class: 'btn btn-primary mb-3' %>
+  <%= link_to 'My Tasks', todos_path(only_my_assignments: true), class: 'btn btn-secondary mb-3' %>
+  <%= link_to 'All Tasks', todos_path, class: 'btn btn-secondary mb-3' %>
 
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
@@ -9,20 +11,20 @@
         <tr>
           <th>Title</th>
           <th>Description</th>
-          <th colspan="3"></th>
+          <th>Assignee</th>
+          <th>Deadline</th>
         </tr>
       </thead>
 
       <tbody>
-        <% @todos.each do |todo| %>
-          <tr>
-            <td><%= todo.title %></td>
-            <td><%= todo.description %></td>
-            <td><%= link_to 'Show', todo, class: 'btn btn-info btn-sm' %></td>
-            <td><%= link_to 'Edit', edit_todo_path(todo), class: 'btn btn-warning btn-sm' %></td>
-            <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %></td>
-          </tr>
-        <% end %>
+      <% @todos.each do |todo| %>
+        <tr class="todo-row" data-url="<%= todo_path(id: todo.id, office_id: current_user.office_id) %>">
+          <td><%= todo.title %></td>
+          <td><%= todo.description %></td>
+          <td><%= User.find(todo.assignee_id).email if todo.assignee_id %></td>
+          <td><%= todo.deadline %></td>
+        </tr>
+      <% end %>
       </tbody>
     </table>
   </div>

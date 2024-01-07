@@ -1,32 +1,53 @@
-<!-- ログインしている場合のみサイドバーを表示 -->
+<!-- _sidebar.html.erb -->
+
 <% if current_user %>
   <div class='col-md-3'>
     <!-- ユーザー情報 -->
-    <h2>User Info</h2>
-    <table class='table'>
-      <tr>
-        <th>Email</th>
-        <td><%= current_user.email %></td>
-      </tr>
-      <tr>
-        <th>Office ID</th>
-        <td><%= current_user.office_id %></td>
-      </tr>
-      <!-- その他のユーザー情報があればここに追加 -->
-    </table>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-user-circle"></i> User Info
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <i class="fas fa-envelope"></i> Email: <%= current_user.email %>
+        </li>
+        <li class="list-group-item">
+          <i class="fas fa-building"></i> Office ID: <%= current_user.office_id %>
+        </li>
+        <!-- その他のユーザー情報があればここに追加 -->
+      </ul>
+    </div>
 
     <!-- 新しいTodoを追加するフォーム -->
-    <h2 class="mt-3">New Todo</h2>
-    <%= form_with(model: Todo.new, local: true) do |form| %>
-      <div class="form-group">
-        <%= form.label :title %>
-        <%= form.text_field :title, class: 'form-control' %>
+    <div class="card">
+      <div class="card-header">
+        <i class="fas fa-tasks"></i> New Todo
       </div>
-      <div class="form-group">
-        <%= form.label :description %>
-        <%= form.text_area :description, class: 'form-control' %>
+      <div class="card-body">
+        <%= form_with(model: Todo.new, url: todos_path(office_id: current_user.office_id), local: true) do |form| %>
+          <div class="form-group">
+            <%= form.label :title %>
+            <%= form.text_field :title, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= form.label :description %>
+            <%= form.text_area :description, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= form.label :deadline %>
+            <%= form.date_select :deadline, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= form.label :assignee_id, 'Assignee' %>
+            <%= form.collection_select :assignee_id, User.all, :id, :email, {include_blank: true}, {class: 'form-control'} %>
+          </div>
+          <div class="form-group">
+            <%= form.label :client_id, 'Client' %>
+            <%= form.collection_select :client_id, TaxClient.all, :id, :name, {include_blank: true}, {class: 'form-control'} %>
+          </div>
+          <%= form.submit "Create Todo", class: 'btn btn-success' %>
+        <% end %>
       </div>
-      <%= form.submit "Create Todo", class: 'btn btn-success' %>
-    <% end %>
+    </div>
   </div>
 <% end %>

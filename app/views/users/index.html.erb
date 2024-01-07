@@ -1,6 +1,8 @@
 <h1>Users</h1>
-<ul>
+<!-- users/index.html.erb -->
+
+<div class="list-group">
   <% @users.each do |user| %>
-    <li><%= link_to user.email, user_path(user) %></li>
+    <%= link_to user.email, user_path(office_id: user.office_id, id: user.id), class: 'list-group-item list-group-item-action' %>
   <% end %>
-</ul>
+</div>

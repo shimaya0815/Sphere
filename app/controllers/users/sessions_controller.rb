@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
 
   # POST /resource/sign_in
   def create
@@ -15,9 +15,10 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
-  # protected
+  protected
 
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:office_id])
-  # end
+  # Deviseのサインインパラメータにoffice_idを追加
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:office_id])
+  end
 end

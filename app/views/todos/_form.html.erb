@@ -1,4 +1,6 @@
-<%= form_with(model: todo, local: true) do |form| %>
+<% action_url = todo.new_record? ? todos_path(office_id: current_user.office_id) : todo_path(id: todo.id, office_id: current_user.office_id) %>
+
+<%= form_with(model: todo, url: action_url, local: true) do |form| %>
   <% if todo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
@@ -19,6 +21,21 @@
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :assignee_id, 'Assignee' %>
+    <%= form.collection_select :assignee_id, User.all, :id, :email, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_field :deadline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tax_client_id, 'Tax Client' %>
+    <%= form.collection_select :tax_client_id, TaxClient.all, :id, :name, include_blank: true %>
   </div>
 
   <div class="actions">

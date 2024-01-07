@@ -8,6 +8,7 @@
         <div class="card-body">
           <%= render 'form', todo: @todo %>
           <%= link_to 'Cancel', @todo, class: 'btn btn-secondary' %>
+          <%= link_to 'Delete', todo_path(id: @todo.id, office_id: current_user.office_id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </div>
       </div>
     </div>

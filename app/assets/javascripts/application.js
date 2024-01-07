@@ -17,3 +17,20 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+document.addEventListener("turbolinks:load", () => {
+  document.querySelectorAll(".clickable-row").forEach(row => {
+    row.addEventListener("click", () => {
+      window.location = row.dataset.href;
+    });
+  });
+});
+
+// application.js
+document.addEventListener('turbolinks:load', function() {
+  document.querySelectorAll('.todo-row').forEach(function(row) {
+    row.addEventListener('click', function() {
+      window.location.href = row.dataset.url;
+    });
+  });
+});
